@@ -1,0 +1,81 @@
+{
+  "name": "07 \u00b7 Maintenance window",
+  "operation": "Preview a maintenance window",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "environment": {
+        "type": "string",
+        "title": "Environment",
+        "enum": [
+          "dev",
+          "stage",
+          "prod"
+        ]
+      },
+      "tasks": {
+        "type": "array",
+        "title": "Tasks",
+        "items": {
+          "type": "string",
+          "enum": [
+            "clear-cache",
+            "reindex-search",
+            "rotate-logs"
+          ]
+        },
+        "uniqueItems": true,
+        "minItems": 1
+      },
+      "durationMinutes": {
+        "type": "integer",
+        "title": "Window length (minutes)",
+        "minimum": 5,
+        "maximum": 120
+      },
+      "reason": {
+        "type": "string",
+        "title": "Reason",
+        "minLength": 10,
+        "maxLength": 200
+      }
+    },
+    "required": [
+      "environment",
+      "tasks",
+      "durationMinutes",
+      "reason"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "uischema": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "type": "Control",
+        "scope": "#/properties/environment"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/tasks"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/durationMinutes"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/reason"
+      }
+    ]
+  },
+  "data": {
+    "environment": "stage",
+    "tasks": [
+      "clear-cache"
+    ],
+    "durationMinutes": 15,
+    "reason": "Scheduled demonstration maintenance"
+  }
+}

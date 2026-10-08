@@ -1,0 +1,78 @@
+{
+  "name": "05 \u00b7 Test matrix",
+  "operation": "Preview combinations of browsers and operating systems",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "browsers": {
+        "type": "array",
+        "title": "Browsers",
+        "items": {
+          "type": "string",
+          "enum": [
+            "chrome",
+            "firefox",
+            "webkit"
+          ]
+        },
+        "uniqueItems": true,
+        "minItems": 1
+      },
+      "operatingSystems": {
+        "type": "array",
+        "title": "Operating systems",
+        "items": {
+          "type": "string",
+          "enum": [
+            "ubuntu",
+            "windows",
+            "macos"
+          ]
+        },
+        "uniqueItems": true,
+        "minItems": 1
+      },
+      "retries": {
+        "type": "integer",
+        "title": "Retry count",
+        "minimum": 0,
+        "maximum": 3
+      }
+    },
+    "required": [
+      "browsers",
+      "operatingSystems",
+      "retries"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "uischema": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "type": "Control",
+        "scope": "#/properties/browsers"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/operatingSystems"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/retries"
+      }
+    ]
+  },
+  "data": {
+    "browsers": [
+      "chrome",
+      "firefox"
+    ],
+    "operatingSystems": [
+      "ubuntu",
+      "macos"
+    ],
+    "retries": 1
+  }
+}

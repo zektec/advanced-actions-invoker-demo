@@ -1,0 +1,31 @@
+name: 13 · Native GitHub baseline
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Native single-choice input
+        type: choice
+        options: [dev, stage, prod]
+        default: stage
+        required: true
+      dry_run:
+        description: Native boolean input
+        type: boolean
+        default: true
+        required: true
+permissions:
+  contents: read
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Show native input values
+        env:
+          DEMO_ENVIRONMENT: ${{ inputs.environment }}
+          DEMO_DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          python - <<'PY'
+          import json, os
+          print(json.dumps({'environment': os.environ['DEMO_ENVIRONMENT'], 'dryRun': os.environ['DEMO_DRY_RUN'], 'mode': 'simulation'}, indent=2))
+          PY

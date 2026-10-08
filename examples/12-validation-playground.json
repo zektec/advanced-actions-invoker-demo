@@ -1,0 +1,75 @@
+{
+  "name": "12 \u00b7 Validation playground",
+  "operation": "Explore required fields and JSON Schema validation",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "identifier": {
+        "type": "string",
+        "title": "Identifier",
+        "pattern": "^[a-z][a-z0-9-]{2,15}$"
+      },
+      "quantity": {
+        "type": "integer",
+        "title": "Quantity",
+        "minimum": 1,
+        "maximum": 10
+      },
+      "tags": {
+        "type": "array",
+        "title": "Tags (JSON array)",
+        "items": {
+          "type": "string",
+          "minLength": 2
+        },
+        "minItems": 1,
+        "maxItems": 4,
+        "uniqueItems": true
+      },
+      "description": {
+        "type": "string",
+        "title": "Description",
+        "minLength": 10,
+        "maxLength": 100
+      }
+    },
+    "required": [
+      "identifier",
+      "quantity",
+      "tags",
+      "description"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "uischema": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "type": "Control",
+        "scope": "#/properties/identifier"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/quantity"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/tags"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/description"
+      }
+    ]
+  },
+  "data": {
+    "identifier": "demo-job",
+    "quantity": 3,
+    "tags": [
+      "demo",
+      "validation"
+    ],
+    "description": "A valid starting point for testing."
+  }
+}

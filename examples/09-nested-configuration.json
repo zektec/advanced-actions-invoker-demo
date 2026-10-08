@@ -1,0 +1,104 @@
+{
+  "name": "09 \u00b7 Nested configuration",
+  "operation": "Preview nested application configuration",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "application": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Application name",
+            "pattern": "^[a-z][a-z0-9-]{2,30}$"
+          },
+          "replicas": {
+            "type": "integer",
+            "title": "Replicas",
+            "minimum": 1,
+            "maximum": 10
+          }
+        },
+        "required": [
+          "name",
+          "replicas"
+        ],
+        "additionalProperties": false
+      },
+      "resources": {
+        "type": "object",
+        "properties": {
+          "cpu": {
+            "type": "string",
+            "title": "CPU allocation",
+            "enum": [
+              "0.5",
+              "1",
+              "2"
+            ]
+          },
+          "memoryMb": {
+            "type": "integer",
+            "title": "Memory (MB)",
+            "minimum": 256,
+            "maximum": 8192
+          }
+        },
+        "required": [
+          "cpu",
+          "memoryMb"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "application",
+      "resources"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "uischema": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "type": "Group",
+        "label": "Application",
+        "elements": [
+          {
+            "type": "Control",
+            "scope": "#/properties/application/properties/name"
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/application/properties/replicas"
+          }
+        ]
+      },
+      {
+        "type": "Group",
+        "label": "Resources",
+        "elements": [
+          {
+            "type": "Control",
+            "scope": "#/properties/resources/properties/cpu"
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/resources/properties/memoryMb"
+          }
+        ]
+      }
+    ]
+  },
+  "data": {
+    "application": {
+      "name": "demo-api",
+      "replicas": 2
+    },
+    "resources": {
+      "cpu": "1",
+      "memoryMb": 512
+    }
+  }
+}

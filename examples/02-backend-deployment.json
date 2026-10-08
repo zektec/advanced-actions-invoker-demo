@@ -1,0 +1,90 @@
+{
+  "name": "02 \u00b7 Backend deployment",
+  "operation": "Preview selected Railway deployments",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "environment": {
+        "type": "string",
+        "title": "Environment",
+        "enum": [
+          "dev",
+          "stage",
+          "prod"
+        ]
+      },
+      "services": {
+        "type": "array",
+        "title": "Services to deploy",
+        "items": {
+          "type": "string",
+          "enum": [
+            "server-api",
+            "identity-service-api",
+            "worker-api"
+          ]
+        },
+        "uniqueItems": true,
+        "minItems": 1
+      },
+      "version": {
+        "type": "string",
+        "title": "Version",
+        "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+      },
+      "dryRun": {
+        "type": "boolean",
+        "title": "Dry run"
+      }
+    },
+    "required": [
+      "environment",
+      "services",
+      "version",
+      "dryRun"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "uischema": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "type": "Group",
+        "label": "Target",
+        "elements": [
+          {
+            "type": "Control",
+            "scope": "#/properties/environment"
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/services"
+          }
+        ]
+      },
+      {
+        "type": "Group",
+        "label": "Release",
+        "elements": [
+          {
+            "type": "Control",
+            "scope": "#/properties/version"
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/dryRun"
+          }
+        ]
+      }
+    ]
+  },
+  "data": {
+    "environment": "stage",
+    "services": [
+      "server-api"
+    ],
+    "version": "v1.2.3",
+    "dryRun": true
+  }
+}

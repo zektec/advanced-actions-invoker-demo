@@ -1,0 +1,79 @@
+{
+  "name": "08 \u00b7 Database backup",
+  "operation": "Preview a database backup plan",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "environment": {
+        "type": "string",
+        "title": "Environment",
+        "enum": [
+          "dev",
+          "stage",
+          "prod"
+        ]
+      },
+      "databases": {
+        "type": "array",
+        "title": "Databases",
+        "items": {
+          "type": "string",
+          "enum": [
+            "server-postgres",
+            "identity-postgres",
+            "analytics-postgres"
+          ]
+        },
+        "uniqueItems": true,
+        "minItems": 1
+      },
+      "retentionDays": {
+        "type": "integer",
+        "title": "Retention (days)",
+        "minimum": 1,
+        "maximum": 90
+      },
+      "compression": {
+        "type": "boolean",
+        "title": "Compress backup"
+      }
+    },
+    "required": [
+      "environment",
+      "databases",
+      "retentionDays",
+      "compression"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "uischema": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "type": "Control",
+        "scope": "#/properties/environment"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/databases"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/retentionDays"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/compression"
+      }
+    ]
+  },
+  "data": {
+    "environment": "stage",
+    "databases": [
+      "server-postgres"
+    ],
+    "retentionDays": 7,
+    "compression": true
+  }
+}

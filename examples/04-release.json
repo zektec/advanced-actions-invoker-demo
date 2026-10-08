@@ -1,0 +1,80 @@
+{
+  "name": "04 \u00b7 Release checklist",
+  "operation": "Preview a release checklist",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "string",
+        "title": "Release version",
+        "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+      },
+      "channel": {
+        "type": "string",
+        "title": "Release channel",
+        "enum": [
+          "stable",
+          "beta",
+          "alpha"
+        ]
+      },
+      "checks": {
+        "type": "array",
+        "title": "Required checks",
+        "items": {
+          "type": "string",
+          "enum": [
+            "unit-tests",
+            "integration-tests",
+            "security-scan",
+            "release-notes"
+          ]
+        },
+        "uniqueItems": true,
+        "minItems": 1
+      },
+      "prerelease": {
+        "type": "boolean",
+        "title": "Mark as prerelease"
+      }
+    },
+    "required": [
+      "version",
+      "channel",
+      "checks",
+      "prerelease"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "uischema": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "type": "Control",
+        "scope": "#/properties/version"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/channel"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/checks"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/prerelease"
+      }
+    ]
+  },
+  "data": {
+    "version": "v2.0.0",
+    "channel": "beta",
+    "checks": [
+      "unit-tests",
+      "security-scan"
+    ],
+    "prerelease": true
+  }
+}

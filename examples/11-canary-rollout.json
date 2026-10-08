@@ -1,0 +1,83 @@
+{
+  "name": "11 \u00b7 Canary rollout",
+  "operation": "Preview a canary rollout plan",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "environment": {
+        "type": "string",
+        "title": "Environment",
+        "enum": [
+          "dev",
+          "stage",
+          "prod"
+        ]
+      },
+      "service": {
+        "type": "string",
+        "title": "Service",
+        "enum": [
+          "server-api",
+          "identity-service-api"
+        ]
+      },
+      "trafficPercent": {
+        "type": "integer",
+        "title": "Canary traffic (%)",
+        "minimum": 1,
+        "maximum": 50
+      },
+      "observationMinutes": {
+        "type": "integer",
+        "title": "Observation (minutes)",
+        "minimum": 5,
+        "maximum": 60
+      },
+      "automaticRollback": {
+        "type": "boolean",
+        "title": "Automatic rollback"
+      }
+    },
+    "required": [
+      "environment",
+      "service",
+      "trafficPercent",
+      "observationMinutes",
+      "automaticRollback"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "uischema": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "type": "Control",
+        "scope": "#/properties/environment"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/service"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/trafficPercent"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/observationMinutes"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/automaticRollback"
+      }
+    ]
+  },
+  "data": {
+    "environment": "stage",
+    "service": "server-api",
+    "trafficPercent": 10,
+    "observationMinutes": 15,
+    "automaticRollback": true
+  }
+}
