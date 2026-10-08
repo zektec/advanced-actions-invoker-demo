@@ -7,17 +7,17 @@ name: 04 · Release checklist
         description: JSON Schema — leave unchanged
         type: string
         required: true
-        default: '{"type":"object","properties":{"version":{"type":"string","title":"Release version","pattern":"^v[0-9]+\\.[0-9]+\\.[0-9]+$"},"channel":{"type":"string","title":"Release channel","enum":["stable","beta","alpha"]},"checks":{"type":"array","title":"Required checks","items":{"type":"string","enum":["unit-tests","integration-tests","security-scan","release-notes"]},"uniqueItems":true,"minItems":1},"prerelease":{"type":"boolean","title":"Mark as prerelease"}},"required":["version","channel","checks","prerelease"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}'
+        default: '{"type":"object","properties":{"version":{"type":"string","title":"Release version","pattern":"^v[0-9]+\\.[0-9]+\\.[0-9]+$"},"channel":{"type":"string","title":"Release channel","enum":["stable","beta","alpha"]},"checks":{"type":"array","title":"Required checks","items":{"type":"string","enum":["unit-tests","integration-tests","security-scan","release-notes"]},"uniqueItems":true,"minItems":1},"prerelease":{"type":"boolean","title":"Mark as prerelease","format":"toggle"},"releaseNotes":{"type":"string","title":"Release notes","format":"textarea","minLength":10,"maxLength":1500},"changelogUrl":{"type":"string","title":"Changelog URL","format":"uri","pattern":"^https://","maxLength":200}},"required":["version","channel","checks","prerelease","releaseNotes","changelogUrl"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}'
       layout:
         description: JSON Forms layout — leave unchanged
         type: string
         required: true
-        default: '{"type":"VerticalLayout","elements":[{"type":"Control","scope":"#/properties/version"},{"type":"Control","scope":"#/properties/channel"},{"type":"Control","scope":"#/properties/checks"},{"type":"Control","scope":"#/properties/prerelease"}]}'
+        default: '{"type":"VerticalLayout","elements":[{"type":"Control","scope":"#/properties/version"},{"type":"Control","scope":"#/properties/channel"},{"type":"Control","scope":"#/properties/checks"},{"type":"Control","scope":"#/properties/prerelease"},{"type":"Control","scope":"#/properties/releaseNotes"},{"type":"Control","scope":"#/properties/changelogUrl"}]}'
       data:
         description: Form values (JSON without the extension)
         type: string
         required: true
-        default: '{"version":"v2.0.0","channel":"beta","checks":["unit-tests","security-scan"],"prerelease":true}'
+        default: '{"version":"v2.0.0","channel":"beta","checks":["unit-tests","security-scan"],"prerelease":true,"releaseNotes":"## Changes\n- Added workflow forms\n- Improved keyboard navigation","changelogUrl":"https://example.com/releases/v2.0.0"}'
 permissions:
   contents: read
 jobs:

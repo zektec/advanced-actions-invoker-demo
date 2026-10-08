@@ -1,0 +1,122 @@
+{
+  "name": "16 · Brand kit preview",
+  "operation": "Create a brand palette and asset manifest without publishing",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "brandName": {
+        "type": "string",
+        "title": "Brand name",
+        "minLength": 2,
+        "maxLength": 60
+      },
+      "primaryColor": {
+        "type": "string",
+        "title": "Primary color",
+        "format": "color",
+        "pattern": "^#[0-9a-fA-F]{6}$"
+      },
+      "backgroundColor": {
+        "type": "string",
+        "title": "Background color",
+        "format": "color",
+        "pattern": "^#[0-9a-fA-F]{6}$"
+      },
+      "logo": {
+        "type": "string",
+        "title": "Sample logo file",
+        "format": "data-url",
+        "pattern": "^data:[^,]*;base64,[A-Za-z0-9+/]*={0,2}$",
+        "maxLength": 4096,
+        "description": "Use a tiny sample file. Contents are encoded in public workflow data; maximum 4096 characters."
+      },
+      "homepage": {
+        "type": "string",
+        "title": "Brand homepage",
+        "format": "uri",
+        "pattern": "^https://",
+        "maxLength": 200
+      },
+      "style": {
+        "type": "string",
+        "title": "Visual style",
+        "format": "radio",
+        "enum": [
+          "minimal",
+          "playful",
+          "editorial"
+        ]
+      },
+      "guidelines": {
+        "type": "string",
+        "title": "Brand guidelines",
+        "format": "textarea",
+        "minLength": 10,
+        "maxLength": 1000
+      },
+      "darkMode": {
+        "type": "boolean",
+        "title": "Include dark theme",
+        "format": "toggle"
+      }
+    },
+    "required": [
+      "brandName",
+      "primaryColor",
+      "backgroundColor",
+      "homepage",
+      "style",
+      "guidelines",
+      "darkMode"
+    ],
+    "additionalProperties": false
+  },
+  "uischema": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "type": "Control",
+        "scope": "#/properties/brandName"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/primaryColor"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/backgroundColor"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/logo"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/homepage"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/style"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/guidelines"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/darkMode"
+      }
+    ]
+  },
+  "data": {
+    "brandName": "Demo Studio",
+    "primaryColor": "#fc8c06",
+    "backgroundColor": "#101820",
+    "logo": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjZmM4YzA2Ii8+PC9zdmc+",
+    "homepage": "https://example.com/demo-studio",
+    "style": "minimal",
+    "guidelines": "Use warm orange accents.\nKeep headings short and readable.",
+    "darkMode": false
+  }
+}

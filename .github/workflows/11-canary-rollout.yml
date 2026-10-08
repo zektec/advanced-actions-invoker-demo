@@ -7,7 +7,7 @@ name: 11 · Canary rollout
         description: JSON Schema — leave unchanged
         type: string
         required: true
-        default: '{"type":"object","properties":{"environment":{"type":"string","title":"Environment","enum":["dev","stage","prod"]},"service":{"type":"string","title":"Service","enum":["server-api","identity-service-api"]},"trafficPercent":{"type":"integer","title":"Canary traffic (%)","minimum":1,"maximum":50},"observationMinutes":{"type":"integer","title":"Observation (minutes)","minimum":5,"maximum":60},"automaticRollback":{"type":"boolean","title":"Automatic rollback"}},"required":["environment","service","trafficPercent","observationMinutes","automaticRollback"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}'
+        default: '{"type":"object","properties":{"environment":{"type":"string","title":"Environment","enum":["dev","stage","prod"]},"service":{"type":"string","title":"Service","enum":["server-api","identity-service-api"]},"trafficPercent":{"type":"integer","title":"Canary traffic (%)","minimum":1,"maximum":50,"format":"range"},"observationMinutes":{"type":"integer","title":"Observation (minutes)","minimum":5,"maximum":60},"automaticRollback":{"type":"boolean","title":"Automatic rollback","format":"toggle"}},"required":["environment","service","trafficPercent","observationMinutes","automaticRollback"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}'
       layout:
         description: JSON Forms layout — leave unchanged
         type: string

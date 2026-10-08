@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 import yaml
-from jsonschema import Draft7Validator
+from jsonschema import Draft7Validator, FormatChecker
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECKOUT = "actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
@@ -14,7 +14,7 @@ ARTIFACT = "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
 
 def validate_config(config):
     Draft7Validator.check_schema(config["schema"])
-    Draft7Validator(config["schema"]).validate(config["data"])
+    Draft7Validator(config["schema"], format_checker=FormatChecker(formats=["date", "time", "email", "uri"])).validate(config["data"])
 
     def visit(node):
         if node["type"] == "Control":

@@ -1,5 +1,5 @@
 {
-  "name": "12 \u00b7 Validation playground",
+  "name": "12 · Validation playground",
   "operation": "Explore required fields and JSON Schema validation",
   "schema": {
     "type": "object",
@@ -30,7 +30,8 @@
         "type": "string",
         "title": "Description",
         "minLength": 10,
-        "maxLength": 100
+        "maxLength": 100,
+        "format": "textarea"
       }
     },
     "required": [

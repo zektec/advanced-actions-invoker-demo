@@ -1,5 +1,5 @@
 {
-  "name": "11 \u00b7 Canary rollout",
+  "name": "11 · Canary rollout",
   "operation": "Preview a canary rollout plan",
   "schema": {
     "type": "object",
@@ -25,7 +25,8 @@
         "type": "integer",
         "title": "Canary traffic (%)",
         "minimum": 1,
-        "maximum": 50
+        "maximum": 50,
+        "format": "range"
       },
       "observationMinutes": {
         "type": "integer",
@@ -35,7 +36,8 @@
       },
       "automaticRollback": {
         "type": "boolean",
-        "title": "Automatic rollback"
+        "title": "Automatic rollback",
+        "format": "toggle"
       }
     },
     "required": [

@@ -1,5 +1,5 @@
 {
-  "name": "04 \u00b7 Release checklist",
+  "name": "04 · Release checklist",
   "operation": "Preview a release checklist",
   "schema": {
     "type": "object",
@@ -35,14 +35,31 @@
       },
       "prerelease": {
         "type": "boolean",
-        "title": "Mark as prerelease"
+        "title": "Mark as prerelease",
+        "format": "toggle"
+      },
+      "releaseNotes": {
+        "type": "string",
+        "title": "Release notes",
+        "format": "textarea",
+        "minLength": 10,
+        "maxLength": 1500
+      },
+      "changelogUrl": {
+        "type": "string",
+        "title": "Changelog URL",
+        "format": "uri",
+        "pattern": "^https://",
+        "maxLength": 200
       }
     },
     "required": [
       "version",
       "channel",
       "checks",
-      "prerelease"
+      "prerelease",
+      "releaseNotes",
+      "changelogUrl"
     ],
     "additionalProperties": false,
     "$schema": "http://json-schema.org/draft-07/schema#"
@@ -65,6 +82,14 @@
       {
         "type": "Control",
         "scope": "#/properties/prerelease"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/releaseNotes"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/changelogUrl"
       }
     ]
   },
@@ -75,6 +100,8 @@
       "unit-tests",
       "security-scan"
     ],
-    "prerelease": true
+    "prerelease": true,
+    "releaseNotes": "## Changes\n- Added workflow forms\n- Improved keyboard navigation",
+    "changelogUrl": "https://example.com/releases/v2.0.0"
   }
 }

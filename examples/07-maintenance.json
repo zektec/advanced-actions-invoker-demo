@@ -1,5 +1,5 @@
 {
-  "name": "07 \u00b7 Maintenance window",
+  "name": "07 · Maintenance window",
   "operation": "Preview a maintenance window",
   "schema": {
     "type": "object",
@@ -37,14 +37,34 @@
         "type": "string",
         "title": "Reason",
         "minLength": 10,
-        "maxLength": 200
+        "maxLength": 200,
+        "format": "textarea"
+      },
+      "scheduledDate": {
+        "type": "string",
+        "title": "Maintenance date",
+        "format": "date"
+      },
+      "startTime": {
+        "type": "string",
+        "title": "Start time (UTC)",
+        "format": "time",
+        "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+      },
+      "notifyOwner": {
+        "type": "string",
+        "title": "Owner email",
+        "format": "email",
+        "maxLength": 120
       }
     },
     "required": [
       "environment",
       "tasks",
       "durationMinutes",
-      "reason"
+      "reason",
+      "scheduledDate",
+      "startTime"
     ],
     "additionalProperties": false,
     "$schema": "http://json-schema.org/draft-07/schema#"
@@ -67,6 +87,18 @@
       {
         "type": "Control",
         "scope": "#/properties/reason"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/scheduledDate"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/startTime"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/notifyOwner"
       }
     ]
   },
@@ -76,6 +108,9 @@
       "clear-cache"
     ],
     "durationMinutes": 15,
-    "reason": "Scheduled demonstration maintenance"
+    "reason": "Scheduled demonstration maintenance",
+    "scheduledDate": "2026-11-12",
+    "startTime": "02:30:00",
+    "notifyOwner": "operator@example.com"
   }
 }

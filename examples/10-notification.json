@@ -1,5 +1,5 @@
 {
-  "name": "10 \u00b7 Notification preview",
+  "name": "10 · Notification preview",
   "operation": "Preview a notification without sending it",
   "schema": {
     "type": "object",
@@ -25,19 +25,35 @@
           "info",
           "warning",
           "critical"
-        ]
+        ],
+        "format": "radio"
       },
       "message": {
         "type": "string",
         "title": "Message",
         "minLength": 5,
-        "maxLength": 300
+        "maxLength": 300,
+        "format": "textarea"
+      },
+      "recipient": {
+        "type": "string",
+        "title": "Preview recipient",
+        "format": "email",
+        "maxLength": 120
+      },
+      "actionUrl": {
+        "type": "string",
+        "title": "Call-to-action URL",
+        "format": "uri",
+        "pattern": "^https://",
+        "maxLength": 200
       }
     },
     "required": [
       "channels",
       "severity",
-      "message"
+      "message",
+      "recipient"
     ],
     "additionalProperties": false,
     "$schema": "http://json-schema.org/draft-07/schema#"
@@ -56,6 +72,14 @@
       {
         "type": "Control",
         "scope": "#/properties/message"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/recipient"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/actionUrl"
       }
     ]
   },
@@ -64,6 +88,8 @@
       "dashboard"
     ],
     "severity": "info",
-    "message": "Demo release is ready for review."
+    "message": "Demo release is ready for review.",
+    "recipient": "reviewer@example.com",
+    "actionUrl": "https://example.com/review"
   }
 }

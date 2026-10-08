@@ -1,5 +1,5 @@
 {
-  "name": "08 \u00b7 Database backup",
+  "name": "08 · Database backup",
   "operation": "Preview a database backup plan",
   "schema": {
     "type": "object",
@@ -36,13 +36,32 @@
       "compression": {
         "type": "boolean",
         "title": "Compress backup"
+      },
+      "backupFormat": {
+        "type": "string",
+        "title": "Backup format",
+        "format": "radio",
+        "enum": [
+          "sql",
+          "custom",
+          "directory"
+        ]
+      },
+      "destination": {
+        "type": "string",
+        "title": "Archive destination",
+        "format": "uri",
+        "pattern": "^https://",
+        "maxLength": 200
       }
     },
     "required": [
       "environment",
       "databases",
       "retentionDays",
-      "compression"
+      "compression",
+      "backupFormat",
+      "destination"
     ],
     "additionalProperties": false,
     "$schema": "http://json-schema.org/draft-07/schema#"
@@ -65,6 +84,14 @@
       {
         "type": "Control",
         "scope": "#/properties/compression"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/backupFormat"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/destination"
       }
     ]
   },
@@ -74,6 +101,8 @@
       "server-postgres"
     ],
     "retentionDays": 7,
-    "compression": true
+    "compression": true,
+    "backupFormat": "custom",
+    "destination": "https://example.com/demo-backups"
   }
 }

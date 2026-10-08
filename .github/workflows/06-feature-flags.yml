@@ -7,7 +7,7 @@ name: 06 · Feature flags
         description: JSON Schema — leave unchanged
         type: string
         required: true
-        default: '{"type":"object","properties":{"environment":{"type":"string","title":"Environment","enum":["dev","stage","prod"]},"features":{"type":"array","title":"Feature flags","items":{"type":"string","enum":["new-navigation","enhanced-search","compact-layout","export-tools"]},"uniqueItems":true,"minItems":1},"enabled":{"type":"boolean","title":"Enable selected flags"},"percentage":{"type":"integer","title":"Rollout percentage","minimum":0,"maximum":100}},"required":["environment","features","enabled","percentage"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}'
+        default: '{"type":"object","properties":{"environment":{"type":"string","title":"Environment","enum":["dev","stage","prod"]},"features":{"type":"array","title":"Feature flags","items":{"type":"string","enum":["new-navigation","enhanced-search","compact-layout","export-tools"]},"uniqueItems":true,"minItems":1},"enabled":{"type":"boolean","title":"Enable selected flags","format":"toggle"},"percentage":{"type":"integer","title":"Rollout percentage","minimum":0,"maximum":100,"format":"range"}},"required":["environment","features","enabled","percentage"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}'
       layout:
         description: JSON Forms layout — leave unchanged
         type: string

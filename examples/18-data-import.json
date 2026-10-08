@@ -1,0 +1,120 @@
+{
+  "name": "18 · Data import preview",
+  "operation": "Inspect a small uploaded CSV and preview import settings without writing records",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "sourceFile": {
+        "type": "string",
+        "title": "Sample CSV file",
+        "format": "data-url",
+        "pattern": "^data:[^,]*;base64,[A-Za-z0-9+/]*={0,2}$",
+        "maxLength": 4096,
+        "description": "Use a tiny sample file. Contents are encoded in public workflow data; maximum 4096 characters."
+      },
+      "delimiter": {
+        "type": "string",
+        "title": "Delimiter",
+        "format": "radio",
+        "enum": [
+          "comma",
+          "semicolon",
+          "tab"
+        ]
+      },
+      "batchSize": {
+        "type": "integer",
+        "title": "Batch size",
+        "minimum": 1,
+        "maximum": 1000
+      },
+      "samplePercent": {
+        "type": "integer",
+        "title": "Rows to sample (%)",
+        "format": "range",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "skipDuplicates": {
+        "type": "boolean",
+        "title": "Skip duplicate records",
+        "format": "toggle"
+      },
+      "columns": {
+        "type": "array",
+        "title": "Columns to inspect",
+        "items": {
+          "type": "string",
+          "enum": [
+            "name",
+            "email",
+            "company"
+          ]
+        },
+        "uniqueItems": true,
+        "minItems": 1
+      },
+      "notes": {
+        "type": "string",
+        "title": "Import notes",
+        "format": "textarea",
+        "maxLength": 1000
+      }
+    },
+    "required": [
+      "sourceFile",
+      "delimiter",
+      "batchSize",
+      "samplePercent",
+      "skipDuplicates",
+      "columns"
+    ],
+    "additionalProperties": false
+  },
+  "uischema": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "type": "Control",
+        "scope": "#/properties/sourceFile"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/delimiter"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/batchSize"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/samplePercent"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/skipDuplicates"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/columns"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/notes"
+      }
+    ]
+  },
+  "data": {
+    "sourceFile": "data:text/csv;base64,bmFtZSxlbWFpbApEZW1vIFBlcnNvbixkZW1vQGV4YW1wbGUuY29tCg==",
+    "delimiter": "comma",
+    "batchSize": 100,
+    "samplePercent": 25,
+    "skipDuplicates": true,
+    "columns": [
+      "name",
+      "email"
+    ],
+    "notes": "Sample data only.\nCheck column mapping before any real import."
+  }
+}

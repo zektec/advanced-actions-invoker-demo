@@ -7,17 +7,17 @@ name: 08 · Database backup
         description: JSON Schema — leave unchanged
         type: string
         required: true
-        default: '{"type":"object","properties":{"environment":{"type":"string","title":"Environment","enum":["dev","stage","prod"]},"databases":{"type":"array","title":"Databases","items":{"type":"string","enum":["server-postgres","identity-postgres","analytics-postgres"]},"uniqueItems":true,"minItems":1},"retentionDays":{"type":"integer","title":"Retention (days)","minimum":1,"maximum":90},"compression":{"type":"boolean","title":"Compress backup"}},"required":["environment","databases","retentionDays","compression"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}'
+        default: '{"type":"object","properties":{"environment":{"type":"string","title":"Environment","enum":["dev","stage","prod"]},"databases":{"type":"array","title":"Databases","items":{"type":"string","enum":["server-postgres","identity-postgres","analytics-postgres"]},"uniqueItems":true,"minItems":1},"retentionDays":{"type":"integer","title":"Retention (days)","minimum":1,"maximum":90},"compression":{"type":"boolean","title":"Compress backup"},"backupFormat":{"type":"string","title":"Backup format","format":"radio","enum":["sql","custom","directory"]},"destination":{"type":"string","title":"Archive destination","format":"uri","pattern":"^https://","maxLength":200}},"required":["environment","databases","retentionDays","compression","backupFormat","destination"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}'
       layout:
         description: JSON Forms layout — leave unchanged
         type: string
         required: true
-        default: '{"type":"VerticalLayout","elements":[{"type":"Control","scope":"#/properties/environment"},{"type":"Control","scope":"#/properties/databases"},{"type":"Control","scope":"#/properties/retentionDays"},{"type":"Control","scope":"#/properties/compression"}]}'
+        default: '{"type":"VerticalLayout","elements":[{"type":"Control","scope":"#/properties/environment"},{"type":"Control","scope":"#/properties/databases"},{"type":"Control","scope":"#/properties/retentionDays"},{"type":"Control","scope":"#/properties/compression"},{"type":"Control","scope":"#/properties/backupFormat"},{"type":"Control","scope":"#/properties/destination"}]}'
       data:
         description: Form values (JSON without the extension)
         type: string
         required: true
-        default: '{"environment":"stage","databases":["server-postgres"],"retentionDays":7,"compression":true}'
+        default: '{"environment":"stage","databases":["server-postgres"],"retentionDays":7,"compression":true,"backupFormat":"custom","destination":"https://example.com/demo-backups"}'
 permissions:
   contents: read
 jobs:

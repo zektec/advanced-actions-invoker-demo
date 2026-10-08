@@ -7,17 +7,17 @@ name: 10 · Notification preview
         description: JSON Schema — leave unchanged
         type: string
         required: true
-        default: '{"type":"object","properties":{"channels":{"type":"array","title":"Channels","items":{"type":"string","enum":["slack","email","dashboard"]},"uniqueItems":true,"minItems":1},"severity":{"type":"string","title":"Severity","enum":["info","warning","critical"]},"message":{"type":"string","title":"Message","minLength":5,"maxLength":300}},"required":["channels","severity","message"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}'
+        default: '{"type":"object","properties":{"channels":{"type":"array","title":"Channels","items":{"type":"string","enum":["slack","email","dashboard"]},"uniqueItems":true,"minItems":1},"severity":{"type":"string","title":"Severity","enum":["info","warning","critical"],"format":"radio"},"message":{"type":"string","title":"Message","minLength":5,"maxLength":300,"format":"textarea"},"recipient":{"type":"string","title":"Preview recipient","format":"email","maxLength":120},"actionUrl":{"type":"string","title":"Call-to-action URL","format":"uri","pattern":"^https://","maxLength":200}},"required":["channels","severity","message","recipient"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}'
       layout:
         description: JSON Forms layout — leave unchanged
         type: string
         required: true
-        default: '{"type":"VerticalLayout","elements":[{"type":"Control","scope":"#/properties/channels"},{"type":"Control","scope":"#/properties/severity"},{"type":"Control","scope":"#/properties/message"}]}'
+        default: '{"type":"VerticalLayout","elements":[{"type":"Control","scope":"#/properties/channels"},{"type":"Control","scope":"#/properties/severity"},{"type":"Control","scope":"#/properties/message"},{"type":"Control","scope":"#/properties/recipient"},{"type":"Control","scope":"#/properties/actionUrl"}]}'
       data:
         description: Form values (JSON without the extension)
         type: string
         required: true
-        default: '{"channels":["dashboard"],"severity":"info","message":"Demo release is ready for review."}'
+        default: '{"channels":["dashboard"],"severity":"info","message":"Demo release is ready for review.","recipient":"reviewer@example.com","actionUrl":"https://example.com/review"}'
 permissions:
   contents: read
 jobs:

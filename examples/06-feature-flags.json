@@ -1,5 +1,5 @@
 {
-  "name": "06 \u00b7 Feature flags",
+  "name": "06 · Feature flags",
   "operation": "Preview a feature flag rollout",
   "schema": {
     "type": "object",
@@ -30,13 +30,15 @@
       },
       "enabled": {
         "type": "boolean",
-        "title": "Enable selected flags"
+        "title": "Enable selected flags",
+        "format": "toggle"
       },
       "percentage": {
         "type": "integer",
         "title": "Rollout percentage",
         "minimum": 0,
-        "maximum": 100
+        "maximum": 100,
+        "format": "range"
       }
     },
     "required": [

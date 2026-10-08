@@ -1,0 +1,142 @@
+{
+  "name": "17 · Event registration preview",
+  "operation": "Build an event agenda and registration summary without inviting anyone",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "eventTitle": {
+        "type": "string",
+        "title": "Event title",
+        "minLength": 3,
+        "maxLength": 80
+      },
+      "eventDate": {
+        "type": "string",
+        "title": "Event date",
+        "format": "date"
+      },
+      "startTime": {
+        "type": "string",
+        "title": "Start time (UTC)",
+        "format": "time",
+        "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+      },
+      "organizerEmail": {
+        "type": "string",
+        "title": "Organizer email",
+        "format": "email",
+        "maxLength": 120
+      },
+      "registrationUrl": {
+        "type": "string",
+        "title": "Registration URL",
+        "format": "uri",
+        "pattern": "^https://",
+        "maxLength": 200
+      },
+      "capacity": {
+        "type": "integer",
+        "title": "Attendee capacity",
+        "minimum": 1,
+        "maximum": 250
+      },
+      "attendance": {
+        "type": "string",
+        "title": "Attendance mode",
+        "format": "radio",
+        "enum": [
+          "online",
+          "in-person",
+          "hybrid"
+        ]
+      },
+      "agenda": {
+        "type": "string",
+        "title": "Agenda",
+        "format": "textarea",
+        "minLength": 10,
+        "maxLength": 1500
+      },
+      "recordSession": {
+        "type": "boolean",
+        "title": "Record session",
+        "format": "toggle"
+      },
+      "accessibilityConfirmed": {
+        "type": "boolean",
+        "title": "Accessibility reviewed"
+      }
+    },
+    "required": [
+      "eventTitle",
+      "eventDate",
+      "startTime",
+      "organizerEmail",
+      "registrationUrl",
+      "capacity",
+      "attendance",
+      "agenda",
+      "recordSession",
+      "accessibilityConfirmed"
+    ],
+    "additionalProperties": false
+  },
+  "uischema": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "type": "Control",
+        "scope": "#/properties/eventTitle"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/eventDate"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/startTime"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/organizerEmail"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/registrationUrl"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/capacity"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/attendance"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/agenda"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/recordSession"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/accessibilityConfirmed"
+      }
+    ]
+  },
+  "data": {
+    "eventTitle": "Workflow workshop",
+    "eventDate": "2026-12-10",
+    "startTime": "09:30:00",
+    "organizerEmail": "organizer@example.com",
+    "registrationUrl": "https://example.com/workshop",
+    "capacity": 40,
+    "attendance": "hybrid",
+    "agenda": "09:30 Welcome\n10:00 Build your first workflow\n11:00 Questions",
+    "recordSession": false,
+    "accessibilityConfirmed": true
+  }
+}
