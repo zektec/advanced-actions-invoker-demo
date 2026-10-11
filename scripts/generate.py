@@ -9,6 +9,7 @@ from jsonschema import Draft7Validator, FormatChecker
 ROOT = Path(__file__).resolve().parents[1]
 CHECKOUT = "actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
 PYTHON = "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+PARSER = "zektec/advanced-actions-invoker-utils@291d2a5e075450f32cba22ea1584a2cd84a60f2c"  # v1.0.0
 ARTIFACT = "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
 
 
@@ -49,8 +50,12 @@ def workflow(slug, config):
                 {"uses": CHECKOUT},
                 {"uses": PYTHON, "with": {"python-version": "3.12"}},
                 {"name": "Install validators", "run": "python -m pip install -r requirements.txt"},
+                {"name": "Parse form inputs", "id": "form", "uses": PARSER,
+                 "with": {"schema": "${{ inputs.schema }}", "layout": "${{ inputs.layout }}",
+                          "data": "${{ inputs.data }}"}},
                 {"name": "Validate and create demo plan",
-                 "env": {"DEMO_DATA": "${{ inputs.data }}"},
+                 "env": {"DEMO_DATA": "${{ inputs.data }}",
+                         "DEMO_PARSED_OUTPUTS": "${{ toJSON(steps.form.outputs) }}"},
                  "run": f"python scripts/run_demo.py {slug}"},
                 {"name": "Downloadable demo plan", "uses": ARTIFACT,
                  "with": {"name": f"{slug}-plan", "path": "demo-plan.json", "retention-days": 7}},

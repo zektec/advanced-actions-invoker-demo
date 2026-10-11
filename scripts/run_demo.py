@@ -69,6 +69,17 @@ def create_plan(slug, data):
     return plan
 
 
+def parsed_data(data, outputs):
+    """Restore JSON types while rejecting lossy or missing action outputs."""
+    result = {}
+    for key, value in data.items():
+        output = outputs[f"data_{key}"]
+        result[key] = output if isinstance(value, str) else json.loads(output)
+    if result != data:
+        raise ValueError("Parsed action outputs do not match submitted data")
+    return result
+
+
 def decode_attachment(value):
     try:
         return base64.b64decode(value.split(",", 1)[1], validate=True)
@@ -81,7 +92,12 @@ def main():
     parser.add_argument("example")
     args = parser.parse_args()
     try:
-        plan = create_plan(args.example, json.loads(os.environ["DEMO_DATA"]))
+        data = json.loads(os.environ["DEMO_DATA"])
+        # Validate original types against the committed schema, not editable inputs.
+        plan = create_plan(args.example, data)
+        if "DEMO_PARSED_OUTPUTS" in os.environ:
+            data = parsed_data(data, json.loads(os.environ["DEMO_PARSED_OUTPUTS"]))
+            plan = create_plan(args.example, data)
     except (ValueError, KeyError, ValidationError, csv.Error) as error:
         raise SystemExit(f"Invalid demo input: {error}") from error
     output = json.dumps(plan, indent=2, ensure_ascii=False)
