@@ -31,9 +31,17 @@ jobs:
         python-version: '3.12'
     - name: Install validators
       run: python -m pip install -r requirements.txt
+    - name: Parse form inputs
+      id: form
+      uses: zektec/advanced-actions-invoker-utils@291d2a5e075450f32cba22ea1584a2cd84a60f2c
+      with:
+        schema: ${{ inputs.schema }}
+        layout: ${{ inputs.layout }}
+        data: ${{ inputs.data }}
     - name: Validate and create demo plan
       env:
         DEMO_DATA: ${{ inputs.data }}
+        DEMO_PARSED_OUTPUTS: ${{ toJSON(steps.form.outputs) }}
       run: python scripts/run_demo.py 06-feature-flags
     - name: Downloadable demo plan
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

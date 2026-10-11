@@ -29,7 +29,13 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install -r requirements.txt
+      - name: Parse native fallback data
+        id: form
+        uses: zektec/advanced-actions-invoker-utils@291d2a5e075450f32cba22ea1584a2cd84a60f2c # v1.0.0
+        with:
+          data: ${{ inputs.data }}
       - name: Native fallback still runs
         env:
           DEMO_DATA: ${{ inputs.data }}
+          DEMO_PARSED_OUTPUTS: ${{ toJSON(steps.form.outputs) }}
         run: python scripts/run_demo.py 01-quick-start

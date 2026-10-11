@@ -9,7 +9,7 @@ from jsonschema.exceptions import ValidationError
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from generate import generate, validate_config
-from run_demo import create_plan
+from run_demo import create_plan, parsed_data
 
 
 class ExamplesTest(unittest.TestCase):
@@ -118,6 +118,17 @@ class ExamplesTest(unittest.TestCase):
         without_url = json.loads((ROOT / "examples/10-notification.json").read_text())["data"]
         del without_url["actionUrl"]
         self.assertIsNone(create_plan("10-notification", without_url)["notificationPreview"]["actionUrl"])
+
+    def test_action_outputs_preserve_types_and_literal_strings(self):
+        data = {"name": "true", "enabled": False, "count": 0,
+                "services": [], "nested": {"value": None}, "notes": "line one\nline two"}
+        outputs = {f"data_{key}": value if isinstance(value, str) else json.dumps(value)
+                   for key, value in data.items()}
+        self.assertEqual(parsed_data(data, outputs), data)
+        with self.assertRaises(KeyError):
+            parsed_data(data, {})
+        with self.assertRaises(ValueError):
+            parsed_data(data, {**outputs, "data_enabled": "true"})
 
     def test_rejects_path_traversal(self):
         with self.assertRaises(ValueError):
