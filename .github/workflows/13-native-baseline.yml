@@ -17,7 +17,7 @@ permissions:
   contents: read
 jobs:
   baseline:
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4-ubuntu-2404
     timeout-minutes: 5
     steps:
       - name: Show native input values
