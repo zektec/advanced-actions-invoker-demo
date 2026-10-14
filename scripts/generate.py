@@ -45,7 +45,7 @@ def workflow(slug, config):
         "on": {"workflow_dispatch": {"inputs": inputs}},
         "permissions": {"contents": "read"},
         "jobs": {"demo": {
-            "runs-on": "ubicloud-standard-4-ubuntu-2404", "timeout-minutes": 5,
+            "runs-on": "warp-ubuntu-2404-x64-4x", "timeout-minutes": 5,
             "steps": [
                 {"uses": CHECKOUT},
                 {"uses": PYTHON, "with": {"python-version": "3.12"}},
