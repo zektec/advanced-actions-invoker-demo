@@ -21,7 +21,7 @@ permissions:
   contents: read
 jobs:
   fallback:
-    runs-on: ubicloud-standard-4-ubuntu-2404
+    runs-on: warp-ubuntu-2404-x64-4x
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
