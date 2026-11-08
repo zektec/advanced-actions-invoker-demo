@@ -48,4 +48,4 @@ jobs:
       with:
         name: 11-canary-rollout-plan
         path: demo-plan.json
-        retention-days: 7
+        retention-days: 1

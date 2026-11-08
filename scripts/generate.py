@@ -58,7 +58,7 @@ def workflow(slug, config):
                          "DEMO_PARSED_OUTPUTS": "${{ toJSON(steps.form.outputs) }}"},
                  "run": f"python scripts/run_demo.py {slug}"},
                 {"name": "Downloadable demo plan", "uses": ARTIFACT,
-                 "with": {"name": f"{slug}-plan", "path": "demo-plan.json", "retention-days": 7}},
+                 "with": {"name": f"{slug}-plan", "path": "demo-plan.json", "retention-days": 1}},
             ],
         }},
     }

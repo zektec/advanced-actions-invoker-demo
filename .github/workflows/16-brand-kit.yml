@@ -48,4 +48,4 @@ jobs:
       with:
         name: 16-brand-kit-plan
         path: demo-plan.json
-        retention-days: 7
+        retention-days: 1
